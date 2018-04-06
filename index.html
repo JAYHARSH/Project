@@ -1,0 +1,62 @@
+
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+    $("document").ready(function () {
+        $("#submit").click(function () {
+        var name=$("#name").val();
+	var gender=$("#gender").val();
+	var email=$("#email").val();
+        var password=$("#pwd").val();  
+        var comment=$("#comment").val();
+       
+         $.ajax({
+                url: '/project/savedata.php',
+                type: 'POST',
+                data: {'name': name,'gender': gender,'email':email,'password':password,'comment':comment},
+                success: function (response) {
+                    console.log(response.data);
+                    },
+	 error: function(err) {
+        alert(err.error);
+        }
+                
+            });
+        });
+    });
+</script>
+</head>
+<body>
+<form id="myform" method="POST" action="/project/savedata.php" >
+<label for="usr">Name:</label>
+<input type="text" class="form-control" id="name" name="name">
+<br>
+<div id="gender">Gender
+ <label class="radio-inline">
+ <input type="radio" name="gender" value="male" checked>Male
+ </label>
+ <label class="radio-inline">
+ <input type="radio" name="gender" value="female" checked>Female
+ </label>
+</div>
+<br>
+</br>
+<label for="pwd">Password:</label>
+ <input type="password" class="form-control" id="pwd" name="password">
+<br>
+</br>
+ <label for="email">Email address:</label>
+ <input type="email" class="form-control" id="email" name="email">
+<br>
+</br>
+ <label for="comment">Comment:</label>
+  <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+<br>
+</br>
+<input type="submit" class="btn btn-primary" id="submit">
+</form>
+</body>
+</html>
